@@ -1,4 +1,3 @@
-//
 #include<cstdlib>
 #include<cstdio>
 typedef struct PolyNode *Polynomial;

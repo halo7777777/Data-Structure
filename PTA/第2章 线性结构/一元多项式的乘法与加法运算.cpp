@@ -6,7 +6,7 @@ struct PolyNode{
     int expon;
     Polynomial link;
 };
-void Attach(int c, int e, Polynomial *pRear)
+void Attach(int c, int e, Polynomial *pRear)   //è¦å¯¹æŒ‡é’ˆrearè¿›è¡Œä¿®æ”¹ï¼Œæ‰€ä»¥ä¼ å…¥çš„æ˜¯æŒ‡é’ˆçš„æŒ‡é’ˆ
 {
     Polynomial P;
 
@@ -32,10 +32,10 @@ Polynomial ReadPoly()
         scanf("%d %d", &c, &e);
         Attach(c, e, &Rear);
     }
-    Rear = P; P = P->link; free(Rear);     /*É¾³ýÁÙÊ±Éú³ÉµÄÍ·½áµã*/
+    Rear = P; P = P->link; free(Rear);     /*åˆ é™¤ä¸´æ—¶ç”Ÿæˆçš„å¤´ç»“ç‚¹*/
     return P;
 }
-Polynomial Add(Polynomial P1, Polynomial P2)      //ºÍ¶àÏîÊ½·ÇÁãÏî
+Polynomial Add(Polynomial P1, Polynomial P2)      //å’Œå¤šé¡¹å¼éžé›¶é¡¹
 {
     Polynomial Rear, temp1, temp2, P;
     temp1 = P1;
@@ -78,10 +78,10 @@ Polynomial Add(Polynomial P1, Polynomial P2)      //ºÍ¶àÏîÊ½·ÇÁãÏî
     {
        Rear->link = temp2;
     }
-    Rear = P; P = P->link; free(Rear);    /*É¾³ýÁÙÊ±Éú³ÉµÄÍ·½áµã*/
+    Rear = P; P = P->link; free(Rear);    /*åˆ é™¤ä¸´æ—¶ç”Ÿæˆçš„å¤´ç»“ç‚¹*/
     return P;
 }
-Polynomial Mult(Polynomial P1, Polynomial P2)      //³Ë¶àÏîÊ½£¬ÐèÒªÌØÅÐ0 0
+Polynomial Mult(Polynomial P1, Polynomial P2)      //ä¹˜å¤šé¡¹å¼ï¼Œéœ€è¦ç‰¹åˆ¤0 0
 {
     Polynomial P, Rear, temp1, temp2, temp;
     int c, e;
@@ -93,13 +93,13 @@ Polynomial Mult(Polynomial P1, Polynomial P2)      //³Ë¶àÏîÊ½£¬ÐèÒªÌØÅÐ0 0
     P = (Polynomial)malloc(sizeof(PolyNode));
     P->link = NULL;
     Rear = P;
-    while(temp2)   //³õÊ¼¶àÏîÊ½ÓÉP1µÄµÚÒ»Ïî³ËÒÔP2µÄÃ¿Ò»ÏîµÃµ½
+    while(temp2)   //åˆå§‹å¤šé¡¹å¼ç”±P1çš„ç¬¬ä¸€é¡¹ä¹˜ä»¥P2çš„æ¯ä¸€é¡¹å¾—åˆ°
     {
         Attach(temp1->coef * temp2->coef, temp1->expon + temp2->expon, &Rear);
         temp2 = temp2->link;
     }
     temp1 = temp1->link;
-    while(temp1)     //Öð²½²åÈë·¨
+    while(temp1)     //é€æ­¥æ’å…¥æ³•
     {
         temp2 = P2;
         Rear = P;
@@ -107,24 +107,24 @@ Polynomial Mult(Polynomial P1, Polynomial P2)      //³Ë¶àÏîÊ½£¬ÐèÒªÌØÅÐ0 0
 		{
 			c = temp1->coef * temp2->coef;
 			e = temp1->expon + temp2->expon;
-			while(Rear->link && Rear->link->expon > e)	//µ±RearµÄÏÂÒ»Ïî²»Îª¿ÕÇÒÏÂÒ»ÏîµÄÖ¸Êý±Èµ±Ç°µÄ³Ë»ýe´óÊ±£¬RearºóÒÆ
-			{									        //ÎªÊ²Ã´e²»¶Ô±ÈRearÖ¸ÏòµÄµ±Ç°ÏîµÄÖ¸Êý£¿
-				Rear = Rear->link;					    //ÒòÎªÊÇµ¥Á´±í£¬Èç¹û°Ñµ±Ç°µÄ¶àÏîÊ½²åÈëRear£¬ÄÇÃ´µ±ÏÈ¶àÏîÊ½ÎÞ·¨ºÍÉÏÒ»ÏîÏàÁ¬½Ó
+			while(Rear->link && Rear->link->expon > e)	//å½“Rearçš„ä¸‹ä¸€é¡¹ä¸ä¸ºç©ºä¸”ä¸‹ä¸€é¡¹çš„æŒ‡æ•°æ¯”å½“å‰çš„ä¹˜ç§¯eå¤§æ—¶ï¼ŒRearåŽç§»
+			{									        //ä¸ºä»€ä¹ˆeä¸å¯¹æ¯”RearæŒ‡å‘çš„å½“å‰é¡¹çš„æŒ‡æ•°ï¼Ÿ
+				Rear = Rear->link;					    //å› ä¸ºæ˜¯å•é“¾è¡¨ï¼Œå¦‚æžœæŠŠå½“å‰çš„å¤šé¡¹å¼æ’å…¥Rearï¼Œé‚£ä¹ˆå½“å…ˆå¤šé¡¹å¼æ— æ³•å’Œä¸Šä¸€é¡¹ç›¸è¿žæŽ¥
 			}
-			if(Rear->link && Rear->link->expon == e)	//Ö¸ÊýÏàµÈµÄÇé¿ö
+			if(Rear->link && Rear->link->expon == e)	//æŒ‡æ•°ç›¸ç­‰çš„æƒ…å†µ
 			{
-				if(Rear->link->coef + c)				//ÏµÊýÏà¼Ó²»ÎªÁã
+				if(Rear->link->coef + c)				//ç³»æ•°ç›¸åŠ ä¸ä¸ºé›¶
 				{
 					Rear->link->coef += c;
 				}
                 else
-                {//ÏµÊýÏà¼ÓÎª0£¬ÊÇÁã¶àÏîÊ½
+                {//ç³»æ•°ç›¸åŠ ä¸º0ï¼Œæ˜¯é›¶å¤šé¡¹å¼
 					Rear->link->coef = 0;
 					Rear->link->expon = 0;
 				}
 			}
 			else
-            {//µ±Ç°¶àÏîÊ½µÄÖ¸Êý´óÓÚRearµÄÏÂÒ»ÏîÖ¸Êý
+            {//å½“å‰å¤šé¡¹å¼çš„æŒ‡æ•°å¤§äºŽRearçš„ä¸‹ä¸€é¡¹æŒ‡æ•°
 				temp = (Polynomial)malloc(sizeof(PolyNode));
 				temp->coef = c;
 				temp->expon = e;
@@ -145,7 +145,7 @@ void PrintPoly(Polynomial P)
     if(!P) {printf("0 0");}
     while(P)
     {
-        if(!flag)             /*flag==0,±íÊ¾ÊÇ¿ªÍ·*/
+        if(!flag)             /*flag==0,è¡¨ç¤ºæ˜¯å¼€å¤´*/
             flag = 1;
         else
             printf(" ");
